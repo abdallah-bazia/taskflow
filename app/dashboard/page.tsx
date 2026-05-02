@@ -5,11 +5,21 @@ import DashboardClient from "./DashboardClient";
 
 export default async function DashboardPage() {
   const session = await auth();
-  if (!session?.user) redirect("/login");
+  if (!session?.user?.id) redirect("/login");
 
   const boards = await prisma.board.findMany({
-    where: { userId: session.user.id! },
+    where: { userId: session.user.id },
     orderBy: { createdAt: "desc" },
   });
-return <DashboardClient boards={boards} user={session.user as { name?: string | null; email?: string | null; id: string }} />;
+
+  return (
+    <DashboardClient
+      boards={boards}
+      user={{
+        id: session.user.id,
+        name: session.user.name ?? null,
+        email: session.user.email ?? null,
+      }}
+    />
+  );
 }
