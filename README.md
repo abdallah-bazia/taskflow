@@ -7,6 +7,8 @@ A Trello-inspired project management app built with **Next.js 15**, **TypeScript
 ![Prisma](https://img.shields.io/badge/Prisma-5-2D3748?style=flat-square&logo=prisma)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38bdf8?style=flat-square&logo=tailwindcss)
 
+🌐 **Live Demo:** [taskflow-mauve-nine.vercel.app](https://taskflow-mauve-nine.vercel.app)
+
 ---
 
 ## ✨ Features
@@ -29,28 +31,24 @@ A Trello-inspired project management app built with **Next.js 15**, **TypeScript
 | Language | TypeScript | Type safety |
 | Auth | NextAuth.js v5 | JWT sessions + credentials provider |
 | ORM | Prisma 5 | Database access layer |
-| Database | SQLite | Local persistent storage |
+| Database | PostgreSQL (Neon) | Cloud persistent storage |
 | Styling | Tailwind CSS | Utility-first UI |
 | Security | bcryptjs | Password hashing |
+| Deployment | Vercel | Frontend + serverless functions |
 
 ---
 
 ## 🗄️ Database Schema
-
-```
 User    → has many Boards
 Board   → has many Columns
 Column  → has many Tasks
 Task    → belongs to Column
-```
 
 All relationships cascade on delete — removing a board removes all its columns and tasks automatically.
 
 ---
 
 ## 📁 Project Structure
-
-```
 taskflow/
 ├── app/
 │   ├── api/
@@ -78,7 +76,6 @@ taskflow/
 ├── prisma/
 │   └── schema.prisma
 └── .env
-```
 
 ---
 
@@ -102,7 +99,7 @@ npm install
 Create `.env`:
 
 ```env
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="your-postgresql-connection-string"
 NEXTAUTH_SECRET="your-secret-key"
 NEXTAUTH_URL="http://localhost:3000"
 ```
