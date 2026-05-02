@@ -11,6 +11,5 @@ export default async function DashboardPage() {
     where: { userId: session.user.id! },
     orderBy: { createdAt: "desc" },
   });
-
-  return <DashboardClient boards={boards} user={session.user} />;
+return <DashboardClient boards={boards} user={session.user as { name?: string | null; email?: string | null; id: string }} />;
 }
