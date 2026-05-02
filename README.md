@@ -49,6 +49,8 @@ All relationships cascade on delete — removing a board removes all its columns
 ---
 
 ## 📁 Project Structure
+
+```
 taskflow/
 ├── app/
 │   ├── api/
@@ -76,8 +78,10 @@ taskflow/
 ├── prisma/
 │   └── schema.prisma
 └── .env
+```
 
 ---
+
 
 ## 🚀 Getting Started
 
