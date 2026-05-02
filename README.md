@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Taskflow — Full-Stack Project Manager
 
-## Getting Started
+A Trello-inspired project management app built with **Next.js 15**, **TypeScript**, and **Prisma**. Users can sign up, create boards, add columns and tasks — all protected behind authentication.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
+![Prisma](https://img.shields.io/badge/Prisma-5-2D3748?style=flat-square&logo=prisma)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38bdf8?style=flat-square&logo=tailwindcss)
+
+---
+
+## ✨ Features
+
+- 🔐 **Authentication** — Secure sign up, login, logout with NextAuth.js and bcrypt password hashing
+- 📋 **Boards** — Create, color-code, and delete project boards per user
+- 📝 **Columns** — Add custom columns to organize your workflow
+- ✅ **Tasks** — Add and delete tasks inside any column
+- 👤 **User isolation** — Each user sees only their own boards and data
+- 📱 **Responsive UI** — Works on desktop and mobile
+- 🛡️ **Protected routes** — Unauthenticated users are redirected to login
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| Framework | Next.js 15 (App Router) | Full-stack React framework |
+| Language | TypeScript | Type safety |
+| Auth | NextAuth.js v5 | JWT sessions + credentials provider |
+| ORM | Prisma 5 | Database access layer |
+| Database | SQLite | Local persistent storage |
+| Styling | Tailwind CSS | Utility-first UI |
+| Security | bcryptjs | Password hashing |
+
+---
+
+## 🗄️ Database Schema
+
+```
+User    → has many Boards
+Board   → has many Columns
+Column  → has many Tasks
+Task    → belongs to Column
+```
+
+All relationships cascade on delete — removing a board removes all its columns and tasks automatically.
+
+---
+
+## 📁 Project Structure
+
+```
+taskflow/
+├── app/
+│   ├── api/
+│   │   ├── auth/[...nextauth]/route.ts
+│   │   ├── boards/route.ts
+│   │   ├── boards/[id]/route.ts
+│   │   ├── boards/[id]/columns/route.ts
+│   │   ├── columns/[id]/route.ts
+│   │   ├── columns/[id]/tasks/route.ts
+│   │   ├── tasks/[id]/route.ts
+│   │   └── register/route.ts
+│   ├── boards/[id]/
+│   │   ├── page.tsx
+│   │   ├── BoardClient.tsx
+│   │   └── TaskCard.tsx
+│   ├── dashboard/
+│   │   ├── page.tsx
+│   │   └── DashboardClient.tsx
+│   ├── login/page.tsx
+│   ├── register/page.tsx
+│   └── page.tsx
+├── lib/
+│   ├── auth.ts
+│   └── prisma.ts
+├── prisma/
+│   └── schema.prisma
+└── .env
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/abdallah-bazia/taskflow.git
+cd taskflow
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create `.env`:
+
+```env
+DATABASE_URL="file:./dev.db"
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+### 4. Set up the database
+
+```bash
+npx prisma db push
+npx prisma generate
+```
+
+### 5. Run the app
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000), register an account and start managing your projects!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 👤 Author
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Abdallah Bazia**
+- GitHub: [@abdallah-bazia](https://github.com/abdallah-bazia)
+- Portfolio: [portfolio-jet-three-82.vercel.app](https://portfolio-jet-three-82.vercel.app)
